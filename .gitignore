@@ -9,3 +9,7 @@
 *[Dd]ata*/
 *checkpoint*/
 *[Ll]og*/
+
+# Ignore nonsense files
+foo.py
+bar.py
