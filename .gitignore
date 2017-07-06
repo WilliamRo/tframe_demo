@@ -5,11 +5,10 @@
 *.pyc
 *pycache*
 
-# Ignore data / checkpoint / log files
-*[Dd]ata*/
-*checkpoint*/
-*[Ll]og*/
+# Ignore records folder
+records/
 
-# Ignore nonsense files
+# Ignore files for test
+foobar/
 foo.py
 bar.py
