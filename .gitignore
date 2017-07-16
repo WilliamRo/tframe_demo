@@ -5,8 +5,9 @@
 *.pyc
 *pycache*
 
-# Ignore records folder
+# Ignore records and data folder
 records/
+data/
 
 # Ignore files for test
 foobar/
