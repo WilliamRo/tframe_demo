@@ -4,11 +4,11 @@ import os
 # FLAGs
 overwrite = True
 
-epoch = 15
+epoch = 2
 batch_size = 50
 
-# shuffle = False
-shuffle = True
+shuffle = False
+# shuffle = True
 
 # Train
 os.system('python ./mnist_deep.py --overwrite {} --epoch {} '
