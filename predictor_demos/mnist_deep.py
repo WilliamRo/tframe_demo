@@ -17,14 +17,15 @@ from tframe.layers import Input
 
 
 def main(_):
+  console.suppress_logging()
   # Start
   console.start("MNIST DEMO")
 
   # Load data
-  mnist = load_mnist('./data/MNIST', one_hot=True)
+  mnist = load_mnist(r'..\data\MNIST', one_hot=True)
 
   # ...
-  model = Predictor()
+  model = Predictor(mark='mnist_deep')
   model.add(Input(shape=[None, 28, 28, 1]))
 
   model.add(Conv2D(filters=32, kernel_size=5, padding='same'))
