@@ -13,3 +13,6 @@ data/
 foobar/
 foo.py
 bar.py
+
+# Ignore private projects
+*private*/
