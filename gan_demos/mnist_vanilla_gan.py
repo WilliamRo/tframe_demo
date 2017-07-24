@@ -18,13 +18,8 @@ def main(_):
   # Start
   console.start()
 
-  # Load data
-  mnist = None
-  if FLAGS.train:
-    mnist = load_mnist(r'..\data\MNIST', flatten=True, validation_size=0)
-
   # Define model
-  gan = GAN(z_dim=100, sample_shape=[784], mark='vanilla_gan',
+  gan = GAN(z_dim=100, sample_shape=[784], mark='vanilla_gan_00',
             output_shape=[28, 28, 1])
 
   gan.G.add(Linear(output_dim=128))
@@ -40,9 +35,10 @@ def main(_):
   # Build model
   gan.build(loss=pedia.cross_entropy)
 
-  # Train model
+  # Train or test
   if FLAGS.train:
-    gan.train(training_set=mnist['train'], epoch=200, batch_size=128,
+    mnist = load_mnist(r'..\data\MNIST', flatten=True, validation_size=0)
+    gan.train(training_set=mnist['train'], epoch=2, batch_size=128,
               print_cycle=50, snapshot_cycle=100)
   else:
     samples = gan.generate(sample_num=16)

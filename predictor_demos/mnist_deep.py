@@ -1,4 +1,6 @@
 from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
 
 import tensorflow as tf
 
@@ -19,7 +21,7 @@ from tframe.layers import Input
 def main(_):
   console.suppress_logging()
   # Start
-  console.start("MNIST DEMO")
+  console.start("MNIST VANILLA GAN DEMO")
 
   # Load data
   mnist = load_mnist(r'..\data\MNIST', one_hot=True)
