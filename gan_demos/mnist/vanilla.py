@@ -22,7 +22,7 @@ def main(_):
 
   # Train or test
   if FLAGS.train:
-    mnist = load_mnist(r'..\..\data\MNIST', flatten=True, validation_size=0)
+    mnist = load_mnist('../../data/MNIST', flatten=True, validation_size=0)
     model.train(training_set=mnist['train'], epoch=2, batch_size=128,
                 print_cycle=50, snapshot_cycle=100)
   else:
