@@ -16,3 +16,6 @@ bar.py
 
 # Ignore private projects
 *private*/
+
+# Ignore ipython notebook checkpoint file
+.ipynb_checkpoints/

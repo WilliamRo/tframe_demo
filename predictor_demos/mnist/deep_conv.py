@@ -17,24 +17,30 @@ from tframe.layers import Flatten
 from tframe.layers import MaxPool2D
 from tframe.layers import Input
 
+from tframe import regularizers
+
 
 def main(_):
   console.suppress_logging()
   # Start
-  console.start("MNIST VANILLA GAN DEMO")
+  console.start("MNIST DEEP CONV DEMO")
 
   # Load data
-  mnist = load_mnist(r'..\data\MNIST', one_hot=True)
+  mnist = load_mnist(r'..\..\data\MNIST', one_hot=True)
 
-  # ...
+  # Define model
+  reg = regularizers.L2(strength=0.1)
+
   model = Predictor(mark='mnist_deep')
-  model.add(Input(shape=[None, 28, 28, 1]))
+  model.add(Input(sample_shape=[28, 28, 1]))
 
-  model.add(Conv2D(filters=32, kernel_size=5, padding='same'))
+  model.add(Conv2D(filters=32, kernel_size=5, padding='same',
+                   kernel_regularizer=reg))
   model.add(Activation('relu'))
   model.add(MaxPool2D(2, 2, 'same'))
 
-  model.add(Conv2D(filters=64, kernel_size=5, padding='same'))
+  model.add(Conv2D(filters=64, kernel_size=5, padding='same',
+                   kernel_regularizer=reg))
   model.add(Activation('relu'))
   model.add(MaxPool2D(2, 2, 'same'))
 

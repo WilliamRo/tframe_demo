@@ -62,7 +62,7 @@ def main(_):
 
   # Train or test
   if FLAGS.train:
-    mnist = load_mnist(r'..\data\MNIST', flatten=False, validation_size=0)
+    mnist = load_mnist(r'..\..\data\MNIST', flatten=False, validation_size=0)
     model.train(training_set=mnist['train'], epoch=5, batch_size=128,
                 print_cycle=20, snapshot_cycle=200, D_times=1, G_times=1)
   else:

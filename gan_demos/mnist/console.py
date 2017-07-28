@@ -2,28 +2,33 @@ from tframe import console
 
 
 class Modules:
-  mnist_vanilla_gan = 'mnist_vanilla_gan'
-  mnist_dcgan = 'mnist_dcgan'
+  vanilla = 'vanilla'
+  dcgan = 'dcgan'
 
 
 # Decide module to run
-module_to_run = Modules.mnist_vanilla_gan
-postfix = '000'
+module_to_run = Modules.vanilla
+postfix = '003'
 mark = '{}_{}'.format(module_to_run, postfix)
 
+overwrite = False
+# overwrite = True
+
 console.execute_py(r'.\{}.py'.format(module_to_run),
-                   epoch=150,
+                   epoch=1400,
                    batch_size=128,
-                   print_cycle=50,
-                   snapshot_cycle=500,
+                   print_cycle=20,
+                   snapshot_cycle=150,
                    fix_sample_z=False,
                    shuffle=False,
                    mark=mark,
                    sample_num=25,
                    train=True,
-                   overwrite=True)
+                   overwrite=overwrite)
 
 """
+This is console for GANs on MNIST
+
 Sample number in training set is 60000
 """
 
