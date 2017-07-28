@@ -19,3 +19,6 @@ bar.py
 
 # Ignore ipython notebook checkpoint file
 .ipynb_checkpoints/
+
+# Ignore vim files
+*.swp

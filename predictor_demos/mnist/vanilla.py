@@ -38,7 +38,7 @@ def main(_):
   # Train model
   if FLAGS.train:
     # Get data sets
-    mnist = load_mnist(r'..\..\data\MNIST', one_hot=True, flatten=True)
+    mnist = load_mnist('../../data/MNIST', one_hot=True, flatten=True)
     model.train(training_set=mnist['train'], test_set=mnist['test'],
                 epoch=10, batch_size=128, print_cycle=50)
   # End

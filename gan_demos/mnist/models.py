@@ -21,7 +21,7 @@ def vanilla(mark, sample_num=9):
   # model.G.add(BatchNorm())
   # model.G.add(Activation('lrelu'))
 
-  model.G.add(Linear(output_dim=256))
+  model.G.add(Linear(output_dim=1024))
   # model.G.add(BatchNorm())
   model.G.add(Activation('relu'))
 
@@ -34,7 +34,7 @@ def vanilla(mark, sample_num=9):
 
   # model.D.add(Rescale(from_scale=[0., 1.], to_scale=[-1., 1.]))
 
-  model.D.add(Linear(output_dim=128))
+  model.D.add(Linear(output_dim=1024))
   model.D.add(Activation('relu'))
 
   # model.D.add(Linear(output_dim=64))

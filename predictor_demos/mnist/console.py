@@ -15,7 +15,7 @@ module_to_run = Modules.vanilla
 postfix = 'l20001'
 mark = '{}_{}'.format(module_to_run, postfix)
 
-console.execute_py(r'.\{}.py'.format(module_to_run),
+console.execute_py('./{}.py'.format(module_to_run),
                    epoch=10,
                    batch_size=100,
                    shuffle=False,

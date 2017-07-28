@@ -8,14 +8,14 @@ class Modules:
 
 # Decide module to run
 module_to_run = Modules.vanilla
-postfix = '003'
+postfix = '004'
 mark = '{}_{}'.format(module_to_run, postfix)
 
-overwrite = False
-# overwrite = True
+# overwrite = False
+overwrite = True
 
-console.execute_py(r'.\{}.py'.format(module_to_run),
-                   epoch=1400,
+console.execute_py('./{}.py'.format(module_to_run),
+                   epoch=1900,
                    batch_size=128,
                    print_cycle=20,
                    snapshot_cycle=150,
