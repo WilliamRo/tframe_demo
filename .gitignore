@@ -22,3 +22,7 @@ bar.py
 
 # Ignore vim files
 *.swp
+
+# Ignore any excel files
+*.xls
+*.xlsx

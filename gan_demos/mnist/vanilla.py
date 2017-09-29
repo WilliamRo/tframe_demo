@@ -7,9 +7,10 @@ import tensorflow as tf
 from tframe.utils.tfdata import load_mnist
 from tframe import console
 from tframe import FLAGS
+from tframe import pedia
 from tframe.utils import imtool
 
-from models import vanilla
+import models
 
 
 def main(_):
@@ -18,13 +19,17 @@ def main(_):
   console.start()
 
   # Get or define model
-  model = vanilla('vanilla_000')
+  model = models.vanilla('vanilla_c00')
+  # model = models.dcgan('dcgan_c00')
+  # model = models.vanilla_h3_rs_nbn('vanilla_310a')
+  # return
 
   # Train or test
   if FLAGS.train:
-    mnist = load_mnist('../../data/MNIST', flatten=True, validation_size=0)
-    model.train(training_set=mnist['train'], epoch=2, batch_size=128,
-                print_cycle=50, snapshot_cycle=100)
+    mnist = load_mnist('../../data/MNIST', flatten=True, validation_size=0,
+                       one_hot=True)
+    model.train(training_set=mnist[pedia.training], epoch=1000, batch_size=128,
+                print_cycle=20, snapshot_cycle=150, sample_num=25)
   else:
     samples = model.generate(sample_num=16)
     console.show_status('{} samples generated'.format(samples.shape[0]))

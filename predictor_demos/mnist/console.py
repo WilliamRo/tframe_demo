@@ -12,7 +12,7 @@ class Modules:
 
 # Decide  module to run
 module_to_run = Modules.vanilla
-postfix = 'l20001'
+postfix = '000'
 mark = '{}_{}'.format(module_to_run, postfix)
 
 console.execute_py('./{}.py'.format(module_to_run),

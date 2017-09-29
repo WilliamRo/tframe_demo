@@ -7,6 +7,7 @@ import tensorflow as tf
 from tframe.utils.tfdata import load_mnist
 
 from tframe import console
+from tframe import pedia
 
 from tframe import Predictor
 from tframe.layers import Activation
@@ -39,7 +40,7 @@ def main(_):
   if FLAGS.train:
     # Get data sets
     mnist = load_mnist('../../data/MNIST', one_hot=True, flatten=True)
-    model.train(training_set=mnist['train'], test_set=mnist['test'],
+    model.train(training_set=mnist[pedia.training], validation_set=mnist['test'],
                 epoch=10, batch_size=128, print_cycle=50)
   # End
   console.end()

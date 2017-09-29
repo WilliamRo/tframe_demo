@@ -7,35 +7,44 @@ import tensorflow as tf
 from tframe.utils.tfdata import load_mnist
 
 from tframe import console
+from tframe import pedia
 
-from tframe import Predictor
+from tframe import Classifier
+
 from tframe.layers import Activation
-from tframe.layers import Linear
+from tframe.layers import BatchNorm
 from tframe.layers import Conv2D
 from tframe.layers import Dropout
 from tframe.layers import Flatten
+from tframe.layers import Linear
 from tframe.layers import MaxPool2D
 from tframe.layers import Input
 
 from tframe import regularizers
 
+from tframe import FLAGS
+
 
 def main(_):
   console.suppress_logging()
+  FLAGS.overwrite = True
+  FLAGS.train = True
+
   # Start
   console.start("MNIST DEEP CONV DEMO")
 
   # Load data
-  mnist = load_mnist(r'..\..\data\MNIST', one_hot=True)
+  mnist = load_mnist(r'..\..\data\MNIST', one_hot=True, validation_size=5000)
 
   # Define model
-  reg = regularizers.L2(strength=0.1)
+  model = Classifier(mark='deep_conv_00')
+  reg = regularizers.L2(strength=0.0)
 
-  model = Predictor(mark='mnist_deep')
   model.add(Input(sample_shape=[28, 28, 1]))
 
   model.add(Conv2D(filters=32, kernel_size=5, padding='same',
                    kernel_regularizer=reg))
+  model.add(BatchNorm())
   model.add(Activation('relu'))
   model.add(MaxPool2D(2, 2, 'same'))
 
@@ -45,18 +54,22 @@ def main(_):
   model.add(MaxPool2D(2, 2, 'same'))
 
   model.add(Flatten())
-  model.add(Linear(1024))
+  model.add(Linear(512))
   model.add(Activation('relu'))
   model.add(Dropout())
 
   model.add(Linear(10))
 
   # Build model
-  model.build(metric='accuracy', metric_name='Accuracy')
+  model.build(optimizer=tf.train.AdamOptimizer(learning_rate=1e-4))
 
   # Train model
-  model.train(training_set=mnist['train'], test_set=mnist['test'],
-              epoch=5, batch_size=100, print_cycle=50)
+  if FLAGS.train:
+    model.train(training_set=mnist[pedia.training],
+                validation_set=mnist[pedia.validation],
+                epoch=5, batch_size=100, print_cycle=50)
+  else:
+    model.evaluate_model(mnist[pedia.test])
 
   # End
   console.end()

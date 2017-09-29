@@ -7,15 +7,15 @@ class Modules:
 
 
 # Decide module to run
-module_to_run = Modules.vanilla
-postfix = '004'
+module_to_run = Modules.dcgan
+postfix = 'c00'
 mark = '{}_{}'.format(module_to_run, postfix)
 
-# overwrite = False
 overwrite = True
+# overwrite = False
 
 console.execute_py('./{}.py'.format(module_to_run),
-                   epoch=1900,
+                   epoch=2600,
                    batch_size=128,
                    print_cycle=20,
                    snapshot_cycle=150,
