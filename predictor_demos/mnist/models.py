@@ -23,17 +23,39 @@ import config
 
 # region : Deep Convolutional
 
+def vanilla(mark):
+  model = Classifier(mark=mark)
+  model.add(Input(sample_shape=[784]))
+
+  def fc_bn_relu(bn=True):
+    model.add(Linear(100))
+    model.add(Activation('relu'))
+    if bn:
+      model.add(BatchNorm())
+
+  fc_bn_relu()
+  fc_bn_relu()
+
+  model.add(Linear(10))
+
+  # Build model
+  model.build(loss='cross_entropy',
+              optimizer=tf.train.GradientDescentOptimizer(0.01))
+
+  return model
+
+
 def deep_conv(mark):
   # Initiate predictor
   model = Classifier(mark=mark)
-  model.add(Input(sample_shape=config.sample_shape))
+  model.add(Input(sample_shape=[28, 28, 1]))
 
   def ConvBNReLU(filters, strength=1.0, bn=True):
     model.add(Conv2D(filters=filters, kernel_size=5, padding='same',
                      kernel_regularizer=regularizers.L2(strength=strength)))
 
     if bn:
-      model.add(BatchNorm())
+      model.add(BatchNorm)
 
     model.add(Activation('relu'))
 

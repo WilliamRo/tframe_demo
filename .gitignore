@@ -26,3 +26,6 @@ bar.py
 # Ignore any excel files
 *.xls
 *.xlsx
+
+# Ignore any .tfd files
+*.tfd

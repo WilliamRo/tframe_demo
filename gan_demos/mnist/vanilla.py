@@ -15,13 +15,16 @@ import models
 
 def main(_):
   console.suppress_logging()
+  FLAGS.overwrite = True
+  FLAGS.train = True
+
   # Start
   console.start()
 
   # Get or define model
-  model = models.vanilla('vanilla_c00')
+  model = models.vanilla('vanilla_nov9_02_h2_c', bn=False)
   # model = models.dcgan('dcgan_c00')
-  # model = models.vanilla_h3_rs_nbn('vanilla_310a')
+  # model = models.vanilla_h3_rs_nbn('vanilla_nov9_01_h3_nbn_opdef')
   # return
 
   # Train or test

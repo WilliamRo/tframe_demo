@@ -18,20 +18,18 @@ from tframe.layers import Reshape
 
 # region : Vanilla
 
-def vanilla(mark):
-  model = GAN(z_dim=100, sample_shape=[784], mark=mark, classes=10,
+def vanilla(mark, bn=True):
+  model = GAN(z_dim=100, sample_shape=[784], mark=mark, #classes=10,
               output_shape=[28, 28, 1])
 
-  # model.G.add(Linear(output_dim=64))
-  # model.G.add(BatchNorm())
-  # model.G.add(Activation('relu'))
-
   model.G.add(Linear(output_dim=128))
-  # model.G.add(BatchNorm())
+  if bn:
+    model.G.add(BatchNorm())
   model.G.add(Activation('relu'))
 
   model.G.add(Linear(output_dim=256))
-  # model.G.add(BatchNorm())
+  if bn:
+    model.G.add(BatchNorm())
   model.G.add(Activation('relu'))
 
   model.G.add(Linear(output_dim=784))
@@ -43,23 +41,19 @@ def vanilla(mark):
 
   model.D.add(Rescale(from_scale=[0., 1.], to_scale=[-1., 1.]))
 
-  # model.D.add(Linear(output_dim=128))
-  # model.D.add(Activation('lrelu'))
-
   model.D.add(Linear(output_dim=256))
   model.D.add(Activation('lrelu'))
 
   model.D.add(Linear(output_dim=128))
-  # model.D.add(BatchNorm())
+  if bn:
+    model.D.add(BatchNorm())
   model.D.add(Activation('lrelu'))
 
   model.D.add(Linear(output_dim=1))
   model.D.add(Activation('sigmoid'))
 
-  # D_optimizer = tf.train.GradientDescentOptimizer(0.001)
-  D_optimizer = None
-  model.build(loss=pedia.cross_entropy, D_optimizer=D_optimizer,
-              smooth_factor=0.9)
+  # Build model
+  model.build(loss=pedia.cross_entropy, smooth_factor=0.9)
 
   return model
 
@@ -112,11 +106,11 @@ def dcgan(mark):
   # Define generator
   model.G.add(Linear(output_dim=7*7*128))
   model.G.add(Reshape(shape=[7, 7, 128]))
-  # model.G.add(BatchNorm())
+  model.G.add(BatchNorm())
   model.G.add(Activation.ReLU())
 
   model.G.add(Deconv2D(filters=128, kernel_size=5, strides=2, padding='same'))
-  # model.G.add(BatchNorm())
+  model.G.add(BatchNorm())
   model.G.add(Activation.ReLU())
 
   model.G.add(Deconv2D(filters=1, kernel_size=5, strides=2, padding='same'))
@@ -132,7 +126,7 @@ def dcgan(mark):
   model.D.add(Activation.LeakyReLU())
 
   model.D.add(Conv2D(filters=128, kernel_size=5, strides=2, padding='same'))
-  # model.D.add(BatchNorm())
+  model.D.add(BatchNorm())
   model.D.add(Activation.LeakyReLU())
 
   model.D.add(Reshape(shape=[7*7*128]))
