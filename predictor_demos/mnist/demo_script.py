@@ -16,7 +16,7 @@ from tframe.utils.tfdata import load_mnist
 def main(_):
   console.suppress_logging()
 
-  FLAGS.train = False
+  FLAGS.train = True
   FLAGS.overwrite = True
   show_false = True
   flatten = False

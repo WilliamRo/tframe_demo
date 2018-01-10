@@ -55,7 +55,7 @@ def deep_conv(mark):
                      kernel_regularizer=regularizers.L2(strength=strength)))
 
     if bn:
-      model.add(BatchNorm)
+      model.add(BatchNorm())
 
     model.add(Activation('relu'))
 
