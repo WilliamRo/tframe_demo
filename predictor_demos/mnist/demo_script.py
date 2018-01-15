@@ -4,6 +4,9 @@ from __future__ import print_function
 
 import tensorflow as tf
 
+import sys
+sys.path.append('../../')
+
 from tframe import console
 from tframe import FLAGS
 from tframe import pedia
