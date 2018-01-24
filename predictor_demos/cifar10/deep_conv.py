@@ -20,7 +20,7 @@ def main(_):
   console.suppress_logging()
 
   # Setting
-  FLAGS.train = False
+  FLAGS.train = True
   FLAGS.overwrite = True
   # FLAGS.shuffle = True
   show_false_pred = True

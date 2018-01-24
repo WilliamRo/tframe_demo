@@ -35,7 +35,7 @@ def main(_):
   # Train or test
   if FLAGS.train:
     model.train(training_set=mnist[pedia.training],
-                validation_set=mnist[pedia.validation], epoch=30,
+                validation_set=mnist[pedia.validation], epoch=1,
                 batch_size=100, print_cycle=50)
   else:
     model.evaluate_model(mnist[pedia.test], with_false=show_false)

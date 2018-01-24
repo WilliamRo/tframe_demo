@@ -64,11 +64,13 @@ def deep_conv(mark):
   ConvBNReLU(32, reg)
   model.add(Dropout(0.5))
   ConvBNReLU(32, reg)
+
   model.add(MaxPool2D(2, 2, 'same'))
 
   ConvBNReLU(64, reg)
   model.add(Dropout(0.5))
   ConvBNReLU(64, reg)
+
   model.add(MaxPool2D(2, 2, 'same'))
 
   ConvBNReLU(128, reg)
