@@ -38,7 +38,7 @@ def main(_):
   if FLAGS.train:
     model.train(training_set=cifar10[pedia.training],
                 validation_set=cifar10[pedia.validation],
-                epoch=120, batch_size=64, print_cycle=100)
+                epoch=120, batch_size=64, print_cycle=10)
   else:
     model.evaluate_model(cifar10[pedia.test], with_false=show_false_pred)
 
