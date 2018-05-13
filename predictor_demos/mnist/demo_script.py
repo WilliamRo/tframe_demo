@@ -38,7 +38,7 @@ def main(_):
                 validation_set=mnist[pedia.validation], epoch=1,
                 batch_size=100, print_cycle=50)
   else:
-    model.evaluate_model(mnist[pedia.test], with_false=show_false)
+    model.evaluate_model(mnist[pedia.test], export_false=show_false)
 
   # End
   console.end()
